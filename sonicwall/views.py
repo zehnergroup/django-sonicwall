@@ -1,3 +1,4 @@
+import urllib
 import logging
 import requests
 
@@ -107,7 +108,7 @@ def authorize(request, template_name='sonicwall/authorize.html'):
             # Authorization succeeded
             if response_code == "50":
                 logger.info('Succesful LHM authorization; redirecting to: %s', request.GET['req'])
-                return redirect(request.GET['req'])
+                return redirect(urllib.unquote(request.GET['req']))
 
             # Authorization failed, so determine why
             try:
